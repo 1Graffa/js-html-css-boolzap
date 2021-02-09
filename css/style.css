@@ -1,0 +1,373 @@
+*{
+  margin:0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'montserrat', sans-serif;
+}
+body{
+  overflow: hidden !important;
+}
+h2{
+  font-size: 18px;
+}
+img{
+  height: 55px;
+  width: 55px;
+  border-radius: 50%;
+  object-fit: cover ;
+}
+i{
+  font-size: 22px;
+  color: rgb(177,177,177);
+  margin-right: 15px;
+}
+i:hover{
+  cursor: pointer;
+}
+/* ************************* */
+/* background */
+body{
+  width: 100vw;
+  height: 100vh;
+  background-image: linear-gradient(to bottom, rgb(0,150,136) 0px, rgb(0,150,136) 15vh, rgb(220,219,210) 15vh, rgb(220,219,210) 100%);
+}
+.container{
+  display: flex;
+  width: 1120px;
+  height: 95%;
+  margin: 20px auto;
+  min-width: 950px;
+  left: 100px;
+  right: 100px;
+  box-shadow: 1px 2px 2px 2px rgb(0,150,136);
+}
+/* FINESTRA MODALE */
+.modal {
+  position: absolute;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  text-align: center;
+  width: 1200px;
+  height: 630px;
+  border-radius: 20px;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+  background-image: url("../img/sfondo-batzap-logo.jpg");
+  background-position: center;
+  background-size: cover;
+  z-index: 9;
+  transform:none;
+}
+.bat-button{
+  position: absolute;
+  top: 62px;
+  left: 454px;
+  height: 304px;
+  width: 304px;
+  background-color:#4BBF3A;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  transition: 2s;
+  outline: none;
+}
+.bat-button i{
+  font-size: 200px;
+  color:white;
+  transition: 2s;
+}
+.bat-button:hover{
+  background-color: transparent;
+  border: none;
+}
+.bat-button:hover i{
+  color:transparent;
+}
+.modal-overlay {
+  position: absolute;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 8;
+  background: #2c3e50;
+  opacity: 0.9;
+}
+/************* LATO SINISTRO **************/
+.colonna-sx{
+  width: 30%;
+  background: rgb(234,234,234);
+}
+.nome-utente{
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-right: 1px solid darkgrey;
+}
+.nome-utente img{
+  margin: 0 10px;
+}
+.avatar{
+  display: flex;
+  align-items: center;
+}
+.ricevi-notifiche{
+  height: 70px;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  background-color: rgb(142,218,252);
+}
+.ricevi-notifiche>i{
+  background-color: white;
+  border-radius: 50%;
+  padding: 11px;
+}
+.ricevi-notifiche .bell-on{
+  padding: 9px 14px;
+  font-size: 26px;
+}
+.on-off{
+  background: none;
+  color: blue;
+  text-decoration: underline;
+  border: none;
+  outline: none;
+}
+.ricevi-notifiche .hidden{
+  display: none;
+}
+.ricerca{
+  height: 70px;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  padding: 15px;
+  margin: 5px;
+}
+.ricerca input[type=text]{
+  height: 30px;
+  padding-left: 10px;
+  text-decoration: none;
+  width: 90%;
+  border: none;
+  outline: none;
+}
+.contact-list{
+  height: calc(100% - 70px - 70px - 70px - 10px);
+}
+.contact-list li{
+  position: relative;
+  display: flex;
+  background-color: white;
+  padding: 10px;
+}
+.contact-list li div{
+  padding-left: 5px;
+}
+.contact-list li h6{
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  color: grey;
+  font-style: italic;
+}
+.contact-list li i{
+  font-size: 15px;
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  color:transparent;
+}
+.contact-list .active i{
+  font-size: 15px;
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  color:grey;
+}
+.contact-list .active{
+  background-color: #EBEBEB;
+  transition: .5s;
+  transform: scale(1.03);
+  word-break: break-all;
+}
+.contact-list .scrolling-list{
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden !important;
+}
+.scrolling-list li:hover{
+  cursor: pointer;
+}
+.contatto div{
+  padding-left:10px;
+}
+.contatto div small{
+  /* spezza le parole; */
+  word-break: break-all;
+  color: grey;
+}
+.dd-contatti{
+  position: absolute;
+  right: 5px;
+  top: 20px;
+  box-shadow: 0 5px 5px -5px;
+  background: white;
+  z-index: 4;
+  border: solid 1px black;
+}
+.dd-contatti li{
+  padding: 4px 6px;
+}
+.dd-contatti li:hover{
+  background: #F5F5F5;
+}
+/***********LATO DESTRO***********/
+.colonna-dx{
+  width: 70%;
+}
+.header-chat{
+  height: 70px;
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+  background: rgb(234,234,234);
+  padding: 3px;
+}
+.header-chat .contatto{
+  display: flex;
+  align-items: center;
+}
+.header-chat .contatto img{
+  margin-left: 5px;
+}
+.header-chat .contatto p{
+  color: darkgrey;
+}
+.header-chat .contact-text p{
+  padding-left: 9px;
+}
+/****** CHAT AREA ******/
+.chat-space{
+  overflow-y: scroll;
+  width:100%;
+  height: calc(100% - 70px - 70px);
+  background-image: url(../img/sfondo.jpg);
+}
+.chat-space .message{
+  position: relative;
+  min-width: 100px;
+  max-width: 400px;
+  /* non spezza le parole */
+  word-wrap: break-word;
+  border-radius: 10px;
+  box-shadow: 0 5px 5px -5px;
+  margin: 10px 0;
+  padding: 10px 60px 10px 15px;
+}
+.message i{
+  position: absolute;
+  right: 0;
+  top:12px;
+  color: transparent;
+  transition: .2s;
+}
+.message i:hover{
+  font-size: 20px;
+  position: absolute;
+  right: 0;
+  top:6px;
+  color: grey;
+}
+.message small{
+  position: absolute;
+  right: 8px;
+  bottom: 3px;
+  color: grey;
+}
+.message .dd-messages{
+  position: absolute;
+  right: 0;
+  top: 22px;
+  padding: 10px;
+  box-shadow: 0 5px 5px -5px;
+  background: white;
+  z-index: 99;
+  border: 1px solid black;
+}
+.dd-messages li{
+  list-style: none;
+}
+.dd-messages:hover{
+  background: #F5F5F5;
+  cursor: pointer;
+}
+.show{
+  display: inline-block;
+}
+.hidden{
+  display: none;
+}
+.chat-space .sent{
+  background-color: #DCF8C6;
+  float : right;
+  margin-right: 60px;
+  clear: both;
+}
+.chat-space .received{
+  background-color: #FFFFFF;
+  float : left;
+  margin-left: 60px;
+  clear: both;
+}
+/* BARRA INFERIORE INSERIMENTO MESSAGGIO */
+.bottom-dx{
+  bottom: 0;
+  width: 100%;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgb(234,234,234);
+}
+.bottom-dx  input[type=text]{
+  height: 40px;
+  padding-left: 10px;
+  text-decoration: none;
+  width: 570px;
+}
+.bottom-dx i{
+  padding: 40px;
+}
+.emoticon{
+  position: relative;
+}
+.emoji-window{
+  position: absolute;
+  width: 110px;
+  right: 0;
+  top: -100px;
+  box-shadow: 0 5px 5px -5px;
+  background: white;
+  z-index: 5;
+  border-radius: 5px;
+}
+.emoji-window ul{
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 1px;
+}
+.emoji-window ul li{
+  padding: 2px;
+}
+.emoji-window ul li:hover{
+  background: lightblue;
+  cursor:pointer;
+}

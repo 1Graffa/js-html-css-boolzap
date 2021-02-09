@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+  <html lang="it">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <title>Whats Bat</title>
+  </head>
+  <body>
+    <div id="app" class="container">
+      <!-- FINESTRA MODALE -->
+      <div class="modal-overlay"
+       v-if="showModal">
+     </div>
+      <div class="modal" v-if="showModal">
+        <button class="bat-button" @click="showModal = false" class="button"> <i class="fas fa-phone-alt"></i>
+        </button>
+      </div>
+      <!-- FINE FINESTRA MODALE -->
+      <!-- COLONNA SINISTRA -->
+      <div class="colonna-sx">
+        <!-- avatar utente -->
+          <div class="nome-utente">
+            <div class="avatar">
+              <img src="img/wonder.jpg" alt="avatar-utente">
+              <h2>Wonder Woman</h2>
+            </div>
+            <div class="icone">
+              <i class="fas fa-circle-notch"></i>
+              <i class="fas fa-comment-alt"></i>
+              <i class="fas fa-ellipsis-v"></i>
+            </div>
+          </div>
+        <!-- Ricezione notifiche-->
+          <div class="ricevi-notifiche">
+            <i v-if="off" class="fas fa-bell-slash"></i>
+            <i v-else class="fas fa-bell bell-on"></i>
+            <div class="bell-text">
+              <h4 v-if="off">Clicca per ricevere notifiche di nuovi messaggi</h4>
+              <h4 v-else>Notifiche nuovi messaggi attive clicca per disattivare</h4>
+              <button @click="onOFF" class="on-off" type="button" name="button" v-if="off">Attiva notifiche desktop</button>
+              <button @click="onOFF" class="on-off" type="button" name="button" v-else>Disattiva notifiche desktop</button>
+            </div>
+          </div>
+        <!-- Ricerca -->
+          <div class="ricerca">
+            <i class="fas fa-search"></i>
+            <input type="text" @keyup="filtraContatti()" v-model="ricerca" placeholder="Cerca o inizia una nuova chat">
+          </div>
+        <!-- lista contatti -->
+          <div class="contact-list">
+            <div class="scrolling-list">
+              <ul v-if="contatti.length > 0">
+                <li v-for="(elemento, index) in contatti" :class="(index === selected) ? 'elemento active' : 'contatto'" v-if="elemento.visible" @click="daiClassActive(index)">
+                  <img :src="elemento.avatar" alt="avatar">
+                  <div>
+                    <h5>{{ elemento.nome }}</h5>
+                    <small v-if="elemento.messaggi.length">{{ elemento.messaggi[elemento.messaggi.length-1].testo }}
+                    </small>
+                    <!-- DROPDOWN MENU CONVERSAZIONI-->
+                      <i @click="toggleC(index)" class="fas fa-chevron-down"></i>
+                      <div >
+                        <ul class="dd-contatti"   v-if="elemento.ddContatto">
+                          <li  @click="svuotaChat()">
+                            Svuota chat
+                          </li >
+                          <li  @click="eliminaChat(elemento, index)">
+                            Elimina chat
+                          </li>
+                        </ul>
+                      </div>
+                    <!-- DROPDOWN MENU FINE -->
+                    <h6 v-if="elemento.messaggi.length">ultimo messaggio alle {{ elemento.messaggi[elemento.messaggi.length-1].orario }}</h6>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- colonna destra -->
+        <div class="colonna-dx">
+          <!-- HEADER CHAT -->
+          <div class="header-chat">
+            <div class="contatto">
+              <img :src="contatti[selected].avatar" alt="">
+              <div class="contact-text">
+                <div><h3>{{ contatti[selected].nome }}</h3></div>
+                <p>Ultimo accesso oggi alle {{ orario }}</p>
+              </div>
+            </div>
+            <div class="icone">
+              <i class="fas fa-search"></i>
+              <i class="fas fa-paperclip"></i>
+              <i class="fas fa-ellipsis-v"></i>
+            </div>
+          </div>
+        <!-- FINE HEADER CHAT -->
+        <!-- Chat -->
+          <div class="chat-space">
+            <div v-for="(element, index) in contatti[selected].messaggi" class="message" :class="element.classe">
+              <p >{{ element.testo }}</p>
+              <!-- DROP DOWN MENU MESSAGGI-->
+              <i @click="tendinaM(index)" class="fas fa-chevron-down"></i>
+              <div class="dd-messages" :class="element.menu" @click="eliminaMessaggio(index)">Elimina messaggio
+              </div>
+              <!-- FINE DROP DOWN MENU -->
+              <small>{{ element.orario }}</small>
+            </div>
+          </div>
+          <div class="bottom-dx">
+            <div class="emoticon">
+              <i @click="toggleE()" class="far fa-smile"></i>
+              <div class="emoji-window" v-if="emoji">
+                <ul>
+                  <li>&#128512;</li>
+                  <li>&#128516;</li>
+                  <li>&#128525;</li>
+                  <li>&#128151;</li>
+                  <li>&#128513;</li>
+                  <li>&#128514;</li>
+                  <li>&#128515;</li>
+                  <li>&#128516;</li>
+                  <li>&#128517;</li>
+                  <li>&#128546;</li>
+                  <li>&#128556;</li>
+                  <li>&#128557;</li>
+                  <li>&#128561;</li>
+                  <li>&#128547;</li>
+                  <li>&#128540;</li>
+                  <li>&#128536;</li>
+                  <li>&#128523;</li>
+                  <li>&#128522;</li>
+                  <li>&#128519;</li>
+                  <li>&#128520;</li>
+                </ul>
+              </div>
+            </div>
+            <div class="scrivi">
+              <input type="text" @keyup.enter="inserisciMessaggio" v-model="nuovoMessaggio" placeholder="Scrivi un messaggio">
+            </div>
+            <div class="microfono">
+              <i class="fas fa-microphone"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  <!-- JS link -->
+  <script src="js/script.js" charset="utf-8"></script>
+  </body>
+  </html>
